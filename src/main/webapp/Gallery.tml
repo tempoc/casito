@@ -17,11 +17,11 @@
 
         <p:sidebar>
                 <t:if test="galleryRoom.galleryRooms">
-                        <ul t:type="loop" t:source="galleryRoom.galleryRooms" t:value="child">
-                                <li>
+                        <div t:type="loop" t:source="galleryRoom.galleryRooms" t:value="child">
+                                <div>
                                         <t:pagelink page="Gallery" context="child.id">${localizedChildName}</t:pagelink>
-                                </li>
-                        </ul>
+                                </div>
+                        </div>
                 <p:else>
                         ${message:no.folders}
                 </p:else>
@@ -30,10 +30,10 @@
 
         <t:if test="galleryRoom.galleryItems">
                 <h3>${message:section.title.files}</h3>
-                <ul t:type="loop" t:source="galleryRoom.galleryItems" t:value="child">
-                        <li>
+                <div t:type="loop" t:source="galleryRoom.galleryItems" t:value="child">
+                        <div>
                                 ${localizedChildName}
-                        </li>
-                </ul>
+                        </div>
+                </div>
         </t:if>
 </html>

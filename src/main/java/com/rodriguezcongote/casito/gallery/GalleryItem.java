@@ -25,6 +25,8 @@ public class GalleryItem {
 
     protected File file;
 
+    protected GalleryItemType galleryItemType = GalleryItemType.UNKNOWN;
+
     public GalleryItem(GalleryService galleryService,
                        GalleryItemFileFilter galleryItemFileFilter,
                        DirectoryFileFilter directoryFileFilter,
@@ -33,10 +35,25 @@ public class GalleryItem {
         this.directoryFileFilter = directoryFileFilter;
         this.galleryItemFileFilter = galleryItemFileFilter;
         this.file = file;
+
+        if(!file.isDirectory()) {
+            String fn = file.getName();
+            for (GalleryItemType git : GalleryItemType.values()) {
+                String gitStr = git.name();
+                int gitLength = fn.length() - gitStr.length();
+                if (gitLength > 0
+                    && gitStr.equalsIgnoreCase(fn.substring(gitLength))) {
+                    galleryItemType = git;
+                    break;
+                }
+            }
+        }
     }
 
     public String getId() {
-        return file.getPath();
+        String fullPath = file.getPath();
+        String path = fullPath.substring(galleryService.getRootPath().length());
+        return path;
     }
 
     public String getName() {
@@ -68,6 +85,10 @@ public class GalleryItem {
         }
 
         return ancestors;
+    }
+
+    public GalleryItemType getGalleryItemType() {
+        return galleryItemType;
     }
 
     @Override

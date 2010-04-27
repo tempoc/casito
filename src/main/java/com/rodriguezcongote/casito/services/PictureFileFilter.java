@@ -6,7 +6,6 @@
 package com.rodriguezcongote.casito.services;
 
 import com.rodriguezcongote.casito.util.OrFileFilter;
-import java.io.File;
 import java.io.FileFilter;
 
 /**
