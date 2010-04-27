@@ -13,6 +13,7 @@ import com.rodriguezcongote.casito.gallery.GalleryRoom;
  * @author Gabriel
  */
 public interface GalleryService {
+    String getRootPath();
     GalleryRoom getRoot();
     GalleryItem getGalleryItem(String path);
 }
