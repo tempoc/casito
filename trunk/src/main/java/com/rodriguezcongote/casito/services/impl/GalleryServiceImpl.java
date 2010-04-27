@@ -23,15 +23,17 @@ import java.util.logging.Logger;
  * @author Gabriel
  */
 public class GalleryServiceImpl implements GalleryService {
-    public static final String PROPERTIES_FILE = "/../app.properties";
-    public static final String CONTENT_ROOT_KEY = "content.root";
-    public static final String DEFAULT_CONTENT_FOLDER = "content";
+    private static final String PROPERTIES_FILE = "/../app.properties";
+    private static final String CONTENT_ROOT_KEY = "content.root";
+    private static final String DEFAULT_CONTENT_FOLDER = "content";
 
     private DirectoryFileFilter directoryFileFilter;
     private GalleryItemFileFilter galleryItemFileFilter;
 
     private ResourceBundle resources;
     private GalleryRoom root;
+
+    private String rootPath;
     
     public GalleryServiceImpl(DirectoryFileFilter directoryFileFilter, GalleryItemFileFilter galleryItemFileFilter) {
         this.directoryFileFilter = directoryFileFilter;
@@ -57,9 +59,15 @@ public class GalleryServiceImpl implements GalleryService {
 
         File file = new File(
             getClass().getClassLoader().getResource("/").getPath());
+        rootPath =
+               file.getParentFile().getParentFile().getPath() + File.separator +
+               resources.getString(CONTENT_ROOT_KEY);
         root = new GalleryRoom(this, galleryItemFileFilter, directoryFileFilter, new File(
-            file.getParentFile().getParentFile().getPath() + File.separator + resources.getString(
-            CONTENT_ROOT_KEY)));
+            rootPath));
+    }
+
+    public String getRootPath() {
+        return rootPath;
     }
 
     public GalleryRoom getRoot() {
@@ -67,7 +75,7 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     public GalleryItem getGalleryItem(String path) {
-        File file = new File(path);
+        File file = new File(rootPath + path);
         GalleryItem result;
         if(file.isDirectory()) {
             result = new GalleryRoom(this, galleryItemFileFilter,
