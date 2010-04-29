@@ -56,6 +56,12 @@ public class GalleryItem {
         return path;
     }
 
+    public String getRelativePath() {
+        String fullPath = file.getPath();
+        String path = fullPath.substring(galleryService.getRootPath().length());
+        return path;
+    }
+
     public String getName() {
         return file.getName();
     }
@@ -102,4 +108,10 @@ public class GalleryItem {
         hash = 41 * hash + (this.file != null ? this.file.hashCode() : 0);
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
 }

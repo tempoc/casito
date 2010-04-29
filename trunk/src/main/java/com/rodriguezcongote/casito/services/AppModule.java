@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
@@ -123,6 +124,10 @@ public class AppModule
 
 //    -------------- Personalized service section --------------
 
+
+    public NameService buildNameService() {
+        return new NameService();
+    }
 
     public GalleryService buildGalleryService(DirectoryFileFilter directoryFileFilter,
         GalleryItemFileFilter galleryItemFileFilter) {
