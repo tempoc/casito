@@ -31,9 +31,7 @@
         <t:if test="galleryRoom.galleryItems">
                 <h3>${message:section.title.files}</h3>
                 <div t:type="loop" t:source="galleryRoom.galleryItems" t:value="child">
-                        <div>
-                                ${localizedChildName}
-                        </div>
+                        <t:thumbnail galleryItem="child"/>
                 </div>
         </t:if>
 </html>

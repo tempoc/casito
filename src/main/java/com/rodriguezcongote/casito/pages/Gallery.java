@@ -10,6 +10,7 @@ import com.rodriguezcongote.casito.gallery.GalleryRoom;
 import com.rodriguezcongote.casito.services.GalleryService;
 import com.rodriguezcongote.casito.services.DirectoryFileFilter;
 import com.rodriguezcongote.casito.services.GalleryItemFileFilter;
+import com.rodriguezcongote.casito.services.NameService;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -24,6 +25,9 @@ public class Gallery {
 
     @Inject
     private Messages messages;
+
+    @Inject
+    private NameService nameService;
 
     @Inject
     private DirectoryFileFilter folderFileFilter;
@@ -55,9 +59,7 @@ public class Gallery {
     }
     
     private String getLocalizedFileName(GalleryItem galleryItem) {
-        String name = galleryItem.getFile().getName();
-        String folderKey = "file.name." + name;
-        return messages.contains(folderKey) ? messages.get(folderKey) : name;        
+        return nameService.localize(galleryItem, messages);
     }
 
     public String getTitle() {
