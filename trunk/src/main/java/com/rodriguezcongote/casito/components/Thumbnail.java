@@ -7,6 +7,8 @@ package com.rodriguezcongote.casito.components;
 
 import com.rodriguezcongote.casito.gallery.GalleryItem;
 import com.rodriguezcongote.casito.services.NameService;
+import org.apache.tapestry5.Block;
+import org.apache.tapestry5.annotations.IncludeStylesheet;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -16,6 +18,7 @@ import org.apache.tapestry5.services.Request;
  *
  * @author Grodriguez
  */
+@IncludeStylesheet("thumbnail.css")
 public class Thumbnail {
     @Inject
     private NameService nameService;
@@ -25,6 +28,12 @@ public class Thumbnail {
 
     @Inject
     private Request request;
+
+    @Inject
+    private Block pictureBlock;
+
+    @Inject
+    private Block undefinedBlock;
 
     @Parameter(defaultPrefix="prop", allowNull=false, required=true)
     private GalleryItem galleryItem;
@@ -38,6 +47,16 @@ public class Thumbnail {
         result += "/content";
         result += galleryItem.getRelativePath().replaceAll("\\\\", "/");
         return result;
+    }
+
+    public Block getThumbnailBlock() {
+        switch(galleryItem.getGalleryItemType()) {
+            case JPG:
+            case PNG:
+                return pictureBlock;
+            default:
+                return undefinedBlock;
+        }
     }
 
 }

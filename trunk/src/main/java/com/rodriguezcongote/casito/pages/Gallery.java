@@ -29,12 +29,6 @@ public class Gallery {
     @Inject
     private NameService nameService;
 
-    @Inject
-    private DirectoryFileFilter folderFileFilter;
-
-    @Inject
-    private GalleryItemFileFilter galleryItemFileFilter;
-
     @Property
     private GalleryRoom galleryRoom;
 
@@ -50,10 +44,6 @@ public class Gallery {
         return true;
     }
 
-    public String getLocalizedDirectoryName() {
-        return getLocalizedFileName(galleryRoom);
-    }
-
     public String getLocalizedChildName() {
         return getLocalizedFileName(child);
     }
@@ -63,6 +53,6 @@ public class Gallery {
     }
 
     public String getTitle() {
-        return messages.get("title") + ":" + getLocalizedDirectoryName();
+        return messages.get("title") + ":" + getLocalizedFileName(galleryRoom);
     }
 }
