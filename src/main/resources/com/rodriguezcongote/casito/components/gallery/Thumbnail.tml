@@ -6,7 +6,9 @@
           <t:delegate to="thumbnailBlock"/>
 
           <t:block id="pictureBlock">
-              <img class="thumbnail" src="${source}"/>
+              <t:pagelink page="Gallery" context="galleryItem.id">
+                  <img class="thumbnail" src="${source}"/>
+              </t:pagelink>
               <div class="caption-container">
                 ${name}
               </div>

@@ -3,13 +3,14 @@
  * and open the template in the editor.
  */
 
-package com.rodriguezcongote.casito.components;
+package com.rodriguezcongote.casito.components.gallery;
 
 import com.rodriguezcongote.casito.gallery.GalleryItem;
 import com.rodriguezcongote.casito.services.NameService;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.IncludeStylesheet;
 import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
@@ -35,6 +36,7 @@ public class Thumbnail {
     @Inject
     private Block undefinedBlock;
 
+    @Property
     @Parameter(defaultPrefix="prop", allowNull=false, required=true)
     private GalleryItem galleryItem;
 
