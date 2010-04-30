@@ -8,9 +8,8 @@ package com.rodriguezcongote.casito.pages;
 import com.rodriguezcongote.casito.gallery.GalleryItem;
 import com.rodriguezcongote.casito.gallery.GalleryRoom;
 import com.rodriguezcongote.casito.services.GalleryService;
-import com.rodriguezcongote.casito.services.DirectoryFileFilter;
-import com.rodriguezcongote.casito.services.GalleryItemFileFilter;
 import com.rodriguezcongote.casito.services.NameService;
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -21,38 +20,44 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class Gallery {
     @Inject
-    private GalleryService galleryService;
-
-    @Inject
     private Messages messages;
-
     @Inject
     private NameService nameService;
-
+    @Inject
+    private GalleryService galleryService;
+    @Inject
+    private Block roomViewBlock;
+    @Inject
+    private Block defaultViewBlock;
     @Property
-    private GalleryRoom galleryRoom;
-
-    @Property
-    private GalleryItem child;
+    private GalleryItem galleryItem;
 
     public void onActivate() {
-        galleryRoom = galleryService.getRoot();
+        galleryItem = galleryService.getRoot();
     }
 
     public boolean onActivate(String galleryItemId) {
-        this.galleryRoom = (GalleryRoom) galleryService.getGalleryItem(galleryItemId);
+        galleryItem = galleryService.getGalleryItem(galleryItemId);
         return true;
     }
 
-    public String getLocalizedChildName() {
-        return getLocalizedFileName(child);
-    }
-    
-    private String getLocalizedFileName(GalleryItem galleryItem) {
-        return nameService.localize(galleryItem, messages);
+    public String getTitle() {
+        return messages.get("title") + ":" + getLocalizedDirectoryName();
     }
 
-    public String getTitle() {
-        return messages.get("title") + ":" + getLocalizedFileName(galleryRoom);
+    public String getLocalizedDirectoryName() {
+        return getLocalizedFileName(galleryItem);
+    }
+
+    public Block getViewBlock() {
+        if(galleryItem instanceof GalleryRoom) {
+            return roomViewBlock;
+        }
+
+        return defaultViewBlock;
+    }
+
+    private String getLocalizedFileName(GalleryItem gi) {
+        return nameService.localize(gi, messages);
     }
 }
