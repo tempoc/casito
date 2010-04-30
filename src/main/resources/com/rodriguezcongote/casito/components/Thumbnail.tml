@@ -1,11 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<div  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+<div class="thumbnail-container"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
-          <div>
-              <img src="${source}" style="max-height:200px; max-width:200px;"/>
-          </div>
-          <div>
-            ${name}
-          </div>
+          <t:delegate to="thumbnailBlock"/>
+
+          <t:block id="pictureBlock">
+              <img class="thumbnail" src="${source}"/>
+              <div class="caption-container">
+                ${name}
+              </div>
+          </t:block>
+
+          <t:block id="undefinedBlock">
+              <div class="caption-container">
+                  ${name}
+              </div>
+          </t:block>
 </div>
