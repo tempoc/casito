@@ -8,6 +8,7 @@ package com.rodriguezcongote.casito.components.gallery;
 import com.rodriguezcongote.casito.gallery.GalleryItem;
 import com.rodriguezcongote.casito.services.NameService;
 import org.apache.tapestry5.Block;
+import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.annotations.IncludeStylesheet;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
@@ -22,6 +23,9 @@ import org.apache.tapestry5.services.Request;
 @IncludeStylesheet("thumbnail.css")
 public class Thumbnail {
     @Inject
+    private ComponentResources componentResources;
+
+    @Inject
     private NameService nameService;
 
     @Inject
@@ -31,10 +35,7 @@ public class Thumbnail {
     private Request request;
 
     @Inject
-    private Block pictureBlock;
-
-    @Inject
-    private Block undefinedBlock;
+    private Block defaultThumbnailBlock;
 
     @Property
     @Parameter(defaultPrefix="prop", allowNull=false, required=true)
@@ -45,20 +46,21 @@ public class Thumbnail {
     }
 
     public String getSource() {
-        String result = request.getContextPath();
-        result += "/content";
-        result += galleryItem.getRelativePath().replaceAll("\\\\", "/");
-        return result;
+        return galleryItem.getUrl(request);
     }
 
     public Block getThumbnailBlock() {
-        switch(galleryItem.getGalleryItemType()) {
-            case JPG:
-            case PNG:
-                return pictureBlock;
-            default:
-                return undefinedBlock;
+        Block result = null;
+        if(galleryItem.getGalleryItemType() != null) {
+            String blockId = galleryItem.getGalleryItemType() + "Block";
+            result = componentResources.findBlock(blockId);
         }
+
+        if(result == null) {
+            result = defaultThumbnailBlock;
+        }
+
+        return result;
     }
 
 }

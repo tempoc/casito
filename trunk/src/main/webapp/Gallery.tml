@@ -7,8 +7,12 @@
 
           <t:delegate to="viewBlock" />
 
-          <t:block id="roomViewBlock">
+          <t:block id="roomBlock">
               <t:gallery.roomView galleryRoom="galleryItem"/>
+          </t:block>
+
+          <t:block id="jpgBlock">
+              <t:gallery.pictureView galleryItem="galleryItem"/>
           </t:block>
 
           <t:block id="defaultViewBlock">

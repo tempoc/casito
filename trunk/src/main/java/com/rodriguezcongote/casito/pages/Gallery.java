@@ -10,6 +10,7 @@ import com.rodriguezcongote.casito.gallery.GalleryRoom;
 import com.rodriguezcongote.casito.services.GalleryService;
 import com.rodriguezcongote.casito.services.NameService;
 import org.apache.tapestry5.Block;
+import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -20,15 +21,17 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 public class Gallery {
     @Inject
+    private ComponentResources componentResources;
+    @Inject
     private Messages messages;
     @Inject
     private NameService nameService;
     @Inject
     private GalleryService galleryService;
     @Inject
-    private Block roomViewBlock;
-    @Inject
     private Block defaultViewBlock;
+    @Inject
+    private Block roomBlock;
     @Property
     private GalleryItem galleryItem;
 
@@ -50,11 +53,20 @@ public class Gallery {
     }
 
     public Block getViewBlock() {
+        Block result = null;
+
         if(galleryItem instanceof GalleryRoom) {
-            return roomViewBlock;
+            result = roomBlock;
+        } else {
+            String blockId = galleryItem.getGalleryItemType() + "Block";
+            result = componentResources.findBlock(blockId);
         }
 
-        return defaultViewBlock;
+        if(result == null) {
+            result = defaultViewBlock;
+        }
+
+        return result;
     }
 
     private String getLocalizedFileName(GalleryItem gi) {

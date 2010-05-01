@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<div
+    t:sidebarTitle="message:section.title.folders"
+    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+    xmlns:p="tapestry:parameter">
+
+    <h2>
+        <t:if test="galleryItem.ancestors">
+            <t:loop source="galleryItem.ancestors" value="ancestor">
+                <t:pagelink page="Gallery" context="ancestor.id">${localizedAncestorName}</t:pagelink>
+                <span>&nbsp;&gt;</span>
+            </t:loop>
+        </t:if>
+        <t:if test="renderIfRoot">
+            ${localizedItemName}
+        </t:if>
+    </h2>
+</div>

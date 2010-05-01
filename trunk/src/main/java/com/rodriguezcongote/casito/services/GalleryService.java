@@ -14,6 +14,7 @@ import com.rodriguezcongote.casito.gallery.GalleryRoom;
  */
 public interface GalleryService {
     String getRootPath();
+    String getRootUrl();
     GalleryRoom getRoot();
     GalleryItem getGalleryItem(String path);
 }

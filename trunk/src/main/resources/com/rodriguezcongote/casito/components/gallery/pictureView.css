@@ -1,0 +1,18 @@
+/* 
+    Document   : pictureView
+    Created on : Apr 30, 2010, 5:33:09 PM
+    Author     : Grodriguez
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.picture {
+    max-height: 100%;
+    max-width: 100%;
+}
+
