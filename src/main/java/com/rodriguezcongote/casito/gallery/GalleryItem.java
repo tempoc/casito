@@ -11,6 +11,7 @@ import com.rodriguezcongote.casito.services.GalleryService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.tapestry5.services.Request;
 
 /**
  *
@@ -25,7 +26,7 @@ public class GalleryItem {
 
     protected File file;
 
-    protected GalleryItemType galleryItemType = GalleryItemType.UNKNOWN;
+    protected String galleryItemType;
 
     public GalleryItem(GalleryService galleryService,
                        GalleryItemFileFilter galleryItemFileFilter,
@@ -38,14 +39,10 @@ public class GalleryItem {
 
         if(!file.isDirectory()) {
             String fn = file.getName();
-            for (GalleryItemType git : GalleryItemType.values()) {
-                String gitStr = git.name();
-                int gitLength = fn.length() - gitStr.length();
-                if (gitLength > 0
-                    && gitStr.equalsIgnoreCase(fn.substring(gitLength))) {
-                    galleryItemType = git;
-                    break;
-                }
+            int lastDotIndex = fn.lastIndexOf(".");
+            if(lastDotIndex >= 0 && fn.length() > lastDotIndex+1) {
+                galleryItemType = fn.substring(lastDotIndex + 1);
+                galleryItemType = galleryItemType.toLowerCase();
             }
         }
     }
@@ -60,6 +57,13 @@ public class GalleryItem {
         String fullPath = file.getPath();
         String path = fullPath.substring(galleryService.getRootPath().length());
         return path;
+    }
+
+    public String getUrl(Request request) {
+        String result = request.getContextPath();
+        result += galleryService.getRootUrl();
+        result += getRelativePath().replaceAll("\\\\", "/");
+        return result;
     }
 
     public String getName() {
@@ -93,7 +97,7 @@ public class GalleryItem {
         return ancestors;
     }
 
-    public GalleryItemType getGalleryItemType() {
+    public String getGalleryItemType() {
         return galleryItemType;
     }
 

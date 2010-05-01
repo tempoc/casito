@@ -5,15 +5,7 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
-    <h2>
-        <t:if test="galleryRoom.ancestors">
-            <t:loop source="galleryRoom.ancestors" value="child">
-                <t:pagelink page="Gallery" context="child.id">${localizedChildName}</t:pagelink>
-                <span>&nbsp;&gt;</span>
-            </t:loop>
-        </t:if>
-        ${localizedDirectoryName}
-    </h2>
+    <t:gallery.ancestors galleryItem="galleryRoom"/>
 
     <t:if test="galleryRoom.galleryRooms">
         <div t:type="loop" t:source="galleryRoom.galleryRooms" t:value="child">

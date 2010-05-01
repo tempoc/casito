@@ -34,6 +34,7 @@ public class GalleryServiceImpl implements GalleryService {
     private GalleryRoom root;
 
     private String rootPath;
+    private String rootUrl;
     
     public GalleryServiceImpl(DirectoryFileFilter directoryFileFilter, GalleryItemFileFilter galleryItemFileFilter) {
         this.directoryFileFilter = directoryFileFilter;
@@ -64,10 +65,15 @@ public class GalleryServiceImpl implements GalleryService {
                resources.getString(CONTENT_ROOT_KEY);
         root = new GalleryRoom(this, galleryItemFileFilter, directoryFileFilter, new File(
             rootPath));
+        rootUrl = "/" + resources.getString(CONTENT_ROOT_KEY);
     }
 
     public String getRootPath() {
         return rootPath;
+    }
+
+    public String getRootUrl() {
+        return rootUrl;
     }
 
     public GalleryRoom getRoot() {

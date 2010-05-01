@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+    t:sidebarTitle="message:section.title.folders"
+    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+    xmlns:p="tapestry:parameter">
+    <t:gallery.ancestors galleryItem="galleryItem"/>
+    <div>
+        <a href="${url}">${message:download}</a>
+    </div>
+    <img class="picture" src="${url}"/>
+</html>
