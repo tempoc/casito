@@ -49,7 +49,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
             <scope>provided</scope>
         </dependency>
 
-    </dependencies>
+        </dependencies>
     <build>
         <finalName>casito</finalName>
         <plugins>

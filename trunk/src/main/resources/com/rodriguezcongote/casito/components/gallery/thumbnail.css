@@ -12,10 +12,22 @@
 */
 
 img.thumbnail {
-    max-height: 200px;
-    max-width: 200px;
+    max-height: 100%;
+    max-width: 100%;
     border-width: 1px;
     border-style: solid;
+}
+
+img.popup {
+    max-height: 80%;
+    max-width: 80%;
+    border-width: 10px;
+    border-color: white;
+    border-style: solid;
+    z-index: 1000;
+    position: fixed;
+    top: 10%;
+    left: 10%;
 }
 
 .thumbnail-container {
