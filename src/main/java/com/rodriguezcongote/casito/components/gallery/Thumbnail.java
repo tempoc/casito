@@ -9,6 +9,7 @@ import com.rodriguezcongote.casito.gallery.GalleryItem;
 import com.rodriguezcongote.casito.services.NameService;
 import org.apache.tapestry5.Block;
 import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.annotations.IncludeJavaScriptLibrary;
 import org.apache.tapestry5.annotations.IncludeStylesheet;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
@@ -21,6 +22,7 @@ import org.apache.tapestry5.services.Request;
  * @author Grodriguez
  */
 @IncludeStylesheet("thumbnail.css")
+@IncludeJavaScriptLibrary("context:js/jquery-1.4.2.min.js")
 public class Thumbnail {
     @Inject
     private ComponentResources componentResources;

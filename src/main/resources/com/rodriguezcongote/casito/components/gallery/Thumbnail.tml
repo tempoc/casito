@@ -6,11 +6,13 @@
           <t:delegate to="thumbnailBlock"/>
 
           <t:block id="jpgBlock">
-              <t:pagelink page="Gallery" context="galleryItem.id">
-                  <img class="thumbnail" src="${source}"/>
-              </t:pagelink>
+              <img class="thumbnail" src="${source}"
+              onclick="$(this).toggleClass('thumbnail');
+                            $(this).toggleClass('popup');" />
               <div class="caption-container">
-                ${name}
+                  <t:pagelink page="Gallery" context="galleryItem.id">
+                    ${name}
+                  </t:pagelink>
               </div>
           </t:block>
 
