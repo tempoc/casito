@@ -1,0 +1,1 @@
+`Casito` is a web application designed to serve family photos and other media.
